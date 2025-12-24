@@ -1,15 +1,3 @@
-# VidaApp – Infraestructura
-
-Repositorio de infraestructura del proyecto VidaApp.
-
-- Docker / Docker Compose
-- NGINX
-- Backend API
-- Base de datos
-- Seguridad first (SELinux, firewall, least privilege)
-
-Repositorio gestionado desde GitHub.
-
 # VidaApp - estructura servidor
 
 /opt/vidaapp
@@ -23,6 +11,15 @@ Notas:
 - No subir "secrets/" a Git.
 - "data/" debe persistir y respaldarse.
 # VidaApp – Infraestructura
+Repositorio de infraestructura del proyecto VidaApp.
+
+- Docker / Docker Compose
+- NGINX
+- Backend API
+- Base de datos
+- Seguridad first (SELinux, firewall, least privilege)
+
+Repositorio gestionado desde GitHub.
 
 ## 1. Visión general
 
