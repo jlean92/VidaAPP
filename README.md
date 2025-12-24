@@ -5,7 +5,7 @@
   data/         -> persistencia (mysql), backups
   logs/         -> logs operativos del host/servicios
   repos/        -> clones de repos GitLab (opcional)
-  secrets/      -> secretos fuera de git (permisos estrictos)
+  secrets/      -> secretos fuera de git (permisos estrictos) (Solo en el servidor)
 
 Notas:
 - No subir "secrets/" a Git.
