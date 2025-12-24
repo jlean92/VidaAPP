@@ -1,0 +1,98 @@
+cd /opt/vidaapp/infra/docker
+
+cat > compose.yml <<'EOF'
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: vidaapp-mysql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_0900_ai_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+    networks:
+      - vidaapp_net
+
+  flyway:
+    image: flyway/flyway:10
+    container_name: vidaapp-flyway
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    command: -configFiles=/flyway/conf/flyway.conf migrate
+    volumes:
+      - ./flyway/conf:/flyway/conf:ro
+      - ./flyway/sql:/flyway/sql:ro
+    networks:
+      - vidaapp_net
+    restart: "no"
+
+  api:
+    build:
+      context: /opt/vidaapp/repos/vidaapp-backend
+      dockerfile: Dockerfile
+    container_name: vidaapp-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    # Recomendado: solo accesible en el servidor (para debug/admin local)
+    ports:
+      - "127.0.0.1:${API_PORT}:8000"
+    networks:
+      - vidaapp_net
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: vidaapp-nginx
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/www/certbot:/var/www/certbot:ro
+      - ./nginx/certs:/etc/letsencrypt:ro
+    networks:
+      - vidaapp_net
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: vidaapp-certbot
+    volumes:
+      - ./nginx/www/certbot:/var/www/certbot
+      - ./nginx/certs:/etc/letsencrypt
+    restart: "no"
+
+volumes:
+  mysql_data:
+
+networks:
+  vidaapp_net:
+    driver: bridge
+EOF

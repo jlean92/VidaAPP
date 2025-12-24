@@ -1,0 +1,1029 @@
+  105  rm -rf /srv/vida-app/data/mysql
+  106  mkdir -p /srv/vida-app/data/mysql
+  107  ls
+  108  vi docker-compose.yml 
+  109  cd /srv/vida-app/docker
+  110  docker compose up -d
+  111  docker logs --tail=200 vida_db
+  112  getenforce
+  113  ls -ldZ /srv/vida-app/data/mysql
+  114  chcon -Rt svirt_sandbox_file_t /srv/vida-app/data/mysql
+  115  cd /srv/vida-app/docker
+  116  docker compose down
+  117  docker compose up -d
+  118  docker exec -it vida_db mysqladmin ping -h localhost -uroot -p
+  119  Vdj.9374
+  120  docker exec -it vida_db mysqladmin ping -h localhost -uroot -p
+  121  docker exec vida_db env | egrep 'MYSQL_|TZ'
+  122  docker exec -it vida_db mysqladmin ping -h localhost -uroot -p
+  123  docker compose up -d
+  124  docker exec -it vida_db mysqladmin ping -h localhost -uroot -p
+  125  docker logs --tail=200 vida_db
+  126  cd /srv/vida-app/docker
+  127  docker compose down
+  128  rm -rf /srv/vida-app/data/mysql
+  129  mkdir -p /srv/vida-app/data/mysql
+  130  chown -R 999:999 /srv/vida-app/data/mysql
+  131  chmod 750 /srv/vida-app/data/mysql
+  132  getenforce
+  133  chcon -Rt svirt_sandbox_file_t /srv/vida-app/data/mysql
+  134  docker compose up -d db
+  135  docker ps --format "table {{.Names}}\t{{.Status}}"
+  136  docker logs --tail=50 vida_db
+  137  docker exec vida_db mysqladmin ping -h localhost -uroot -proot_pass
+  138  docker exec vida_db mysqladmin ping -h localhost -uroot -p
+  139  docker compose up -d api
+  140  docker ps --format "table {{.Names}}\t{{.Status}}"
+  141  root@vpn:/srv/vida-app/docker# docker compose up -d api
+  142  [+] Running 2/2
+  143   ✘ Container vida_db   Error                                                                                                33.8s
+  144   ✔ Container vida_api  Created                                                                                               2.8s
+  145  dependency failed to start: container vida_db is unhealthy
+  146  cd /srv/vida-app/docker
+  147  docker compose down
+  148  vi docker-compose.yml 
+  149  docker compose up -d db
+  150  docker ps --format "table {{.Names}}\t{{.Status}}"
+  151  until docker logs vida_db 2>/dev/null | grep -q "ready for connections"; do   echo "Esperando a MySQL...";   sleep 5; done
+  152  echo "MySQL listo"
+  153  docker compose down
+  154  docker rm -f vida_db vida_api 2>/dev/null
+  155  rm -rf /srv/vida-app/data/mysql
+  156  mkdir -p /srv/vida-app/data/mysql
+  157  ls -la /srv/vida-app/data/mysql
+  158  vi docker-compose.yml 
+  159  cd /srv/vida-app/docker
+  160  docker compose up -d db
+  161  docker logs -f vida_db
+  162  docker volume ls | grep -i vida
+  163  docker inspect vida_db --format '{{json .Mounts}}'
+  164  docker ps --format "table {{.Names}}\t{{.Status}}"
+  165  docker inspect vida_db --format '{{json .Mounts}}'
+  166  docker compose down -d db
+  167  docker compose down 
+  168  docker ps --format "table {{.Names}}\t{{.Status}}"
+  169  ls
+  170  rm docker-compose.yml 
+  171  cd ..
+  172  ls
+  173  cd ..
+  174  rm vida-app -f
+  175  rm vida-app
+  176  rmdir -f vida-app
+  177  rmdir -- help
+  178  rmdir --help
+  179  rm --help
+  180  rmdir -r vida-app
+  181  rm -r vida-app
+  182  s
+  183  ls
+  184  cd ..
+  185  rmdir srv
+  186  APP_ROOT="/opt/vidaapp"
+  187  groupadd --system vidaapp 2>/dev/null || true
+  188  useradd  --system --no-create-home --shell /sbin/nologin   --gid vidaapp vidaapp 2>/dev/null || true
+  189  mkdir -p   "$APP_ROOT/infra/docker"   "$APP_ROOT/infra/docker/flyway/conf"   "$APP_ROOT/infra/docker/flyway/sql"   "$APP_ROOT/data/mysql"   "$APP_ROOT/data/backups"   "$APP_ROOT/logs"   "$APP_ROOT/repos"   "$APP_ROOT/secrets"
+  190  cd /opt/vidaapp/
+  191  ls
+  192  chown -R vidaapp:vidaapp "$APP_ROOT"
+  193  chown -R root:root "$APP_ROOT/secrets"
+  194  chmod 700 "$APP_ROOT/secrets"
+  195  chmod 750 "$APP_ROOT" "$APP_ROOT/data" "$APP_ROOT/logs" "$APP_ROOT/infra" "$APP_ROOT/repos"
+  196  chmod 750 "$APP_ROOT/data/mysql" "$APP_ROOT/data/backups"
+  197  cat > "$APP_ROOT/README.server.md" <<'EOF'
+  198  # VidaApp - estructura servidor
+  199  /opt/vidaapp
+  200    infra/        -> Docker Compose, config, flyway scripts
+  201    data/         -> persistencia (mysql), backups
+  202    logs/         -> logs operativos del host/servicios
+  203    repos/        -> clones de repos GitLab (opcional)
+  204    secrets/      -> secretos fuera de git (permisos estrictos)
+  205  Notas:
+  206  - No subir "secrets/" a Git.
+  207  - "data/" debe persistir y respaldarse.
+  208  EOF
+  209  ls -la "$APP_ROOT"
+  210  find "$APP_ROOT" -maxdepth 2 -type d -print
+  211  cd /opt/vidaapp/infra/docker
+  212  cat > .env <<'EOF'
+  213  MYSQL_ROOT_PASSWORD=rootpass
+  214  MYSQL_DATABASE=vidaapp
+  215  MYSQL_USER=vidaapp
+  216  MYSQL_PASSWORD=vidaapppass
+  217  MYSQL_PORT=3306
+  218  EOF
+  219  cat > compose.yml <<'EOF'
+  220  services:
+  221    mysql:
+  222      image: mysql:8.4
+  223      container_name: vidaapp-mysql
+  224      environment:
+  225        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  226        MYSQL_DATABASE: ${MYSQL_DATABASE}
+  227        MYSQL_USER: ${MYSQL_USER}
+  228        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  229      ports:
+  230        - "${MYSQL_PORT}:3306"
+  231      volumes:
+  232        - mysql_data:/var/lib/mysql
+  233      restart: unless-stopped
+  234  volumes:
+  235    mysql_data:
+  236  EOF
+  237  docker compose up -d
+  238  docker compose ps
+  239  docker logs -f vidaapp-mysql
+  240  mysql -h 127.0.0.1 -P 3306 -uvidaapp -p vidaapp
+  241  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp
+  242  passwd
+  243  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp
+  244  ${MYSQL_PASSWORD}
+  245  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp
+  246  vi compose.yml 
+  247  docker compose up -d
+  248  docker compose ps
+  249  docker inspect -f '{{.State.Health.Status}}' vidaapp-mysql
+  250  cd /opt/vidaapp/infra/docker
+  251  mkdir -p flyway/conf flyway/sql
+  252  cat > flyway/conf/flyway.conf <<'EOF'
+  253  flyway.url=jdbc:mysql://mysql:3306/vidaapp?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+  254  flyway.user=vidaapp
+  255  flyway.password=${MYSQL_PASSWORD}
+  256  flyway.locations=filesystem:/flyway/sql
+  257  flyway.baselineOnMigrate=true
+  258  flyway.validateMigrationNaming=true
+  259  EOF
+  260  cat > flyway/sql/V1__init.sql <<'EOF'
+  261  -- VidaApp - base mínima
+  262  CREATE TABLE IF NOT EXISTS schema_version_probe (
+  263    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  264    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  265  ) ENGINE=InnoDB;
+  266  INSERT INTO schema_version_probe () VALUES ();
+  267  EOF
+  268  cat > compose.yml <<'EOF'
+  269  services:
+  270    mysql:
+  271      image: mysql:8.4
+  272      container_name: vidaapp-mysql
+  273      command: >
+  274        --character-set-server=utf8mb4
+  275        --collation-server=utf8mb4_0900_ai_ci
+  276      environment:
+  277        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  278        MYSQL_DATABASE: ${MYSQL_DATABASE}
+  279        MYSQL_USER: ${MYSQL_USER}
+  280        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  281      ports:
+  282        - "${MYSQL_PORT}:3306"
+  283      volumes:
+  284        - mysql_data:/var/lib/mysql
+  285      healthcheck:
+  286        test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+  287        interval: 5s
+  288        timeout: 3s
+  289        retries: 30
+  290      restart: unless-stopped
+  291      networks:
+  292        - vidaapp_net
+  293    flyway:
+  294      image: flyway/flyway:10
+  295      container_name: vidaapp-flyway
+  296      depends_on:
+  297        mysql:
+  298          condition: service_healthy
+  299      environment:
+  300        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  301      command: -configFiles=/flyway/conf/flyway.conf migrate
+  302      volumes:
+  303        - ./flyway/conf:/flyway/conf:ro
+  304        - ./flyway/sql:/flyway/sql:ro
+  305      networks:
+  306        - vidaapp_net
+  307      restart: "no"
+  308  volumes:
+  309    mysql_data:
+  310  networks:
+  311    vidaapp_net:
+  312      driver: bridge
+  313  EOF
+  314  docker compose up -d
+  315  cat > flyway/sql/V1__init.sql <<'EOF'
+  316  -- VidaApp - base mínima
+  317  CREATE TABLE IF NOT EXISTS schema_version_probe (
+  318    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  319    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  320  ) ENGINE=InnoDB;
+  321  INSERT INTO schema_version_probe () VALUES ();
+  322  EOF
+  323  docker logs -f vidaapp-flyway
+  324  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp -e "SHOW TABLES;"
+  325  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp -e "SELECT version, description, success FROM flyway_schema_history;"
+  326  mkdir -p /opt/vidaapp/repos/vidaapp-backend/app
+  327  cd /opt/vidaapp/repos/vidaapp-backend
+  328  cat > requirements.txt <<'EOF'
+  329  fastapi==0.115.0
+  330  uvicorn[standard]==0.30.6
+  331  mysql-connector-python==9.0.0
+  332  EOF
+  333  cat > app/main.py <<'EOF'
+  334  from fastapi import FastAPI
+  335  import os
+  336  import mysql.connector
+  337  app = FastAPI(title="VidaApp API")
+  338  def get_db_conn():
+  339      return mysql.connector.connect(
+  340          host=os.environ["DB_HOST"],
+  341          port=int(os.environ["DB_PORT"]),
+  342          user=os.environ["DB_USER"],
+  343          password=os.environ["DB_PASSWORD"],
+  344          database=os.environ["DB_NAME"],
+  345          autocommit=True,
+  346      )
+  347  @app.get("/health")
+  348  def health():
+  349      return {"status": "ok"}
+  350  @app.get("/health/db")
+  351  def health_db():
+  352      conn = get_db_conn()
+  353      cur = conn.cursor()
+  354      cur.execute("SELECT 1")
+  355      cur.fetchone()
+  356      cur.close()
+  357      conn.close()
+  358      return {"db": "ok"}
+  359  EOF
+  360  cat > Dockerfile <<'EOF'
+  361  FROM python:3.12-slim
+  362  ENV PYTHONDONTWRITEBYTECODE=1 \
+  363      PYTHONUNBUFFERED=1
+  364  WORKDIR /app
+  365  RUN apt-get update && apt-get install -y --no-install-recommends \
+  366        curl \
+  367      && rm -rf /var/lib/apt/lists/*
+  368  COPY requirements.txt .
+  369  RUN pip install --no-cache-dir -r requirements.txt
+  370  COPY app ./app
+  371  EXPOSE 8000
+  372  CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+  373  EOF
+  374  cd /opt/vidaapp/infra/docker
+  375  cat >> .env <<'EOF'
+  376  # API
+  377  API_PORT=8000
+  378  DB_HOST=mysql
+  379  DB_PORT=3306
+  380  DB_NAME=vidaapp
+  381  DB_USER=vidaapp
+  382  DB_PASSWORD=vidaapppass
+  383  EOF
+  384  cd /opt/vidaapp/infra/docker
+  385  cat > compose.yml <<'EOF'
+  386  services:
+  387    mysql:
+  388      image: mysql:8.4
+  389      container_name: vidaapp-mysql
+  390      command: >
+  391        --character-set-server=utf8mb4
+  392        --collation-server=utf8mb4_0900_ai_ci
+  393      environment:
+  394        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  395        MYSQL_DATABASE: ${MYSQL_DATABASE}
+  396        MYSQL_USER: ${MYSQL_USER}
+  397        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  398      ports:
+  399        - "${MYSQL_PORT}:3306"
+  400      volumes:
+  401        - mysql_data:/var/lib/mysql
+  402      healthcheck:
+  403        test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+  404        interval: 5s
+  405        timeout: 3s
+  406        retries: 30
+  407      restart: unless-stopped
+  408      networks:
+  409        - vidaapp_net
+  410    flyway:
+  411      image: flyway/flyway:10
+  412      container_name: vidaapp-flyway
+  413      depends_on:
+  414        mysql:
+  415          condition: service_healthy
+  416      environment:
+  417        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  418      command: -configFiles=/flyway/conf/flyway.conf migrate
+  419      volumes:
+  420        - ./flyway/conf:/flyway/conf:ro
+  421        - ./flyway/sql:/flyway/sql:ro
+  422      networks:
+  423        - vidaapp_net
+  424      restart: "no"
+  425    api:
+  426      build:
+  427        context: /opt/vidaapp/repos/vidaapp-backend
+  428        dockerfile: Dockerfile
+  429      container_name: vidaapp-api
+  430      depends_on:
+  431        mysql:
+  432          condition: service_healthy
+  433        flyway:
+  434          condition: service_completed_successfully
+  435      environment:
+  436        DB_HOST: ${DB_HOST}
+  437        DB_PORT: ${DB_PORT}
+  438        DB_NAME: ${DB_NAME}
+  439        DB_USER: ${DB_USER}
+  440        DB_PASSWORD: ${DB_PASSWORD}
+  441      ports:
+  442        - "${API_PORT}:8000"
+  443      networks:
+  444        - vidaapp_net
+  445      restart: unless-stopped
+  446  volumes:
+  447    mysql_data:
+  448  networks:
+  449    vidaapp_net:
+  450      driver: bridge
+  451  EOF
+  452  cd /opt/vidaapp/infra/docker
+  453  docker compose up -d --build
+  454  docker compose ps
+  455  curl -s http://127.0.0.1:8000/health
+  456  curl -s http://127.0.0.1:8000/health/db
+  457  firewall-cmd --list-ports
+  458  firewall-cmd --add-port=8000/tcp --permanent
+  459  firewall-cmd --add-port=3306/tcp --permanent
+  460  firewall-cmd --reload
+  461  ss -tuln | grep -E '8000|3306'
+  462  firewall-cmd --add-service=http --permanent
+  463  firewall-cmd --add-service=https --permanent
+  464  firewall-cmd --reload
+  465  firewall-cmd --list-services
+  466  cd /opt/vidaapp/infra/docker
+  467  mkdir -p nginx/conf.d nginx/www/certbot nginx/certs
+  468  cat > nginx/conf.d/vidaapp.conf <<'EOF'
+  469  server {
+  470      listen 80;
+  471      server_name jlean92.es;
+  472      # Let’s Encrypt challenge
+  473      location /.well-known/acme-challenge/ {
+  474          root /var/www/certbot;
+  475      }
+  476      # Reverse proxy a la API
+  477      location / {
+  478          proxy_pass http://api:8000;
+  479          proxy_http_version 1.1;
+  480          proxy_set_header Host $host;
+  481          proxy_set_header X-Forwarded-Proto $scheme;
+  482          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  483          proxy_set_header X-Real-IP $remote_addr;
+  484          # timeouts razonables
+  485          proxy_connect_timeout 10s;
+  486          proxy_read_timeout 60s;
+  487          proxy_send_timeout 60s;
+  488      }
+  489  }
+  490  EOF
+  491  cd /opt/vidaapp/infra/docker
+  492  cat > compose.yml <<'EOF'
+  493  services:
+  494    mysql:
+  495      image: mysql:8.4
+  496      container_name: vidaapp-mysql
+  497      command: >
+  498        --character-set-server=utf8mb4
+  499        --collation-server=utf8mb4_0900_ai_ci
+  500      environment:
+  501        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  502        MYSQL_DATABASE: ${MYSQL_DATABASE}
+  503        MYSQL_USER: ${MYSQL_USER}
+  504        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  505      ports:
+  506        - "${MYSQL_PORT}:3306"
+  507      volumes:
+  508        - mysql_data:/var/lib/mysql
+  509      healthcheck:
+  510        test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+  511        interval: 5s
+  512        timeout: 3s
+  513        retries: 30
+  514      restart: unless-stopped
+  515      networks:
+  516        - vidaapp_net
+  517    flyway:
+  518      image: flyway/flyway:10
+  519      container_name: vidaapp-flyway
+  520      depends_on:
+  521        mysql:
+  522          condition: service_healthy
+  523      environment:
+  524        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  525      command: -configFiles=/flyway/conf/flyway.conf migrate
+  526      volumes:
+  527        - ./flyway/conf:/flyway/conf:ro
+  528        - ./flyway/sql:/flyway/sql:ro
+  529      networks:
+  530        - vidaapp_net
+  531      restart: "no"
+  532    api:
+  533      build:
+  534        context: /opt/vidaapp/repos/vidaapp-backend
+  535        dockerfile: Dockerfile
+  536      container_name: vidaapp-api
+  537      depends_on:
+  538        mysql:
+  539          condition: service_healthy
+  540        flyway:
+  541          condition: service_completed_successfully
+  542      environment:
+  543        DB_HOST: ${DB_HOST}
+  544        DB_PORT: ${DB_PORT}
+  545        DB_NAME: ${DB_NAME}
+  546        DB_USER: ${DB_USER}
+  547        DB_PASSWORD: ${DB_PASSWORD}
+  548      # Recomendado: solo accesible en el servidor (para debug/admin local)
+  549      ports:
+  550        - "127.0.0.1:${API_PORT}:8000"
+  551      networks:
+  552        - vidaapp_net
+  553      restart: unless-stopped
+  554    nginx:
+  555      image: nginx:1.27-alpine
+  556      container_name: vidaapp-nginx
+  557      depends_on:
+  558        - api
+  559      ports:
+  560        - "80:80"
+  561        - "443:443"
+  562      volumes:
+  563        - ./nginx/conf.d:/etc/nginx/conf.d:ro
+  564        - ./nginx/www/certbot:/var/www/certbot:ro
+  565        - ./nginx/certs:/etc/letsencrypt:ro
+  566      networks:
+  567        - vidaapp_net
+  568      restart: unless-stopped
+  569    certbot:
+  570      image: certbot/certbot:latest
+  571      container_name: vidaapp-certbot
+  572      volumes:
+  573        - ./nginx/www/certbot:/var/www/certbot
+  574        - ./nginx/certs:/etc/letsencrypt
+  575      restart: "no"
+  576  volumes:
+  577    mysql_data:
+  578  networks:
+  579    vidaapp_net:
+  580      driver: bridge
+  581  EOF
+  582  cat file.bash
+  583  vi file.bash
+  584  bash file.bash 
+  585  cat compose.yml 
+  586  docker compose up -d --build
+  587  Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint vidaapp-nginx (398a936a68665f0ddbd30b3bdcae5f92eb649eb5c796339a5f4bbaad450d6421): failed to bind host port for 0.0.0.0:80:172.21.0.4:80/tcp: address already in use
+  588  
+  589  ss -tulpen | grep ':80 '
+  590  lsof -iTCP:80 -sTCP:LISTEN -n -P
+  591  docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+  592  vi compose.yml 
+  593  docker compose up -d --build
+  594  firewall-cmd --add-port=81/tcp --permanent
+  595  firewall-cmd --reload
+  596  cd /opt/vidaapp/infra/docker
+  597  docker compose up -d
+  598  curl -i http://127.0.0.1:81/health
+  599  docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+  600  curl -i http://192.168.1.17:81/health
+  601  curl -i http://127.0.0.1:81/health
+  602  vi compose.yml 
+  603  docker compose up -d --build
+  604  docker compose ps
+  605  curl -i http://127.0.0.1:81/health
+  606  docker ps
+  607  curl -i http://127.0.0.1:81/
+  608  curl -i http://127.0.0.1:81
+  609  curl -i http://127.0.0.1:81/health
+  610  cat /etc/nginx/
+  611  cat nginx/
+  612  cat /etc/nginx/nginx.conf
+  613  systemctl status httpd
+  614  systemctl status nginx
+  615  systemctl stop nginx
+  616  systemctl status nginx
+  617  curl -i http://127.0.0.1:80
+  618  curl -i http://127.0.0.1:81
+  619  docker compose ps
+  620  vi compose.yml 
+  621  docker compose up -d --build
+  622  curl -i http://127.0.0.1:80
+  623  docker ps
+  624  vi compose.yml 
+  625  docker compose up -d --build
+  626  cd /opt/vaultwarden/
+  627  ls
+  628  docker compose up
+  629  docker compose up 
+  630  docker compose up -d --build
+  631  history
+  632  history >> test.txt
+  633  more test.txt 
+  634  docker compose up -d
+  635  ls
+  636  cat docker-compose.yml 
+  637  docker ps
+  638  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  639  systemctl start nginx
+  640  firewall-cmd --add-port=81/tcp --permanent
+  641  firewall-cmd --reload
+  642  firewall-cmd --list-ports
+  643  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  644  curl -I http://127.0.0.1:8080
+  645  systemctl stop nginx
+  646  curl -I http://127.0.0.1:8080
+  647  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  648  systemctl start nginx
+  649  cd /etc/nginx/
+  650  cat nginx.conf
+  651  vi nginx.conf
+  652  docker ps
+  653  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  654  docker stop vidaapp-nginx
+  655  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  656  systemctl restart nginx
+  657  systemctl status nginx
+  658  ss -tulpen | grep ':8080 ' || echo "No hay nada escuchando en 8080"
+  659  ss -tulpen | grep ':80 ' || echo "No hay nada escuchando en 8080"
+  660  ss -tulpen | grep ':443 ' || echo "No hay nada escuchando en 8080"
+  661  vi nginx.conf
+  662  cd default.d/
+  663  ls
+  664  cd ..
+  665  ls
+  666  cat conf.d/vault.conf 
+  667  vi conf.d/vault.conf 
+  668  systemctl restart nginx
+  669  vi conf.d/vault.conf 
+  670  vi nginx.conf
+  671  systemctl restart nginx
+  672  journalctl -xeu nginx.service
+  673  firewall-cmd --add-port=4431/tcp --permanent
+  674  firewall-cmd --reload
+  675  systemctl restart nginx
+  676  journalctl -xeu nginx.service
+  677  ausearch -m avc -ts recent | tail -n 30
+  678  semanage port -m -t http_port_t -p tcp 4431
+  679  dnf install -y policycoreutils-python-utils
+  680  semanage port -l | grep http_port_t | grep -w 4431 || true
+  681  semanage port -a -t http_port_t -p tcp 4431
+  682  semanage port -l | grep http_port_t | grep -w 4431 || true
+  683  semanage port -l | grep http_port_t | grep -w 4431
+  684  nginx -t
+  685  systemctl restart nginx
+  686  nginx -t
+  687  ss -tulpen | grep ':4431 '
+  688  ss -tulpen | grep ':443 '
+  689  ss -tulpen | grep ':80 '
+  690  ss -tulpen | grep ':80'
+  691  cd /opt/vidaapp/
+  692  ls
+  693  cd infra/
+  694  ls
+  695  cd docker/
+  696  ls
+  697  cat compose.yml 
+  698  vi compose.yml 
+  699  docker compose up -d --build
+  700  firewall-cmd --list-ports
+  701  docker ps
+  702  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  703  vi compose.yml 
+  704  docker compose up -d --build
+  705  docker ps --format "table {{.Names}}\t{{.Ports}}"
+  706  firewall-cmd --remove-port=3306/tcp --permanent
+  707  firewall-cmd --permanent --add-rich-rule='
+  708  rule family="ipv4"
+  709  source address="192.168.1.15"
+  710  port protocol="tcp" port="3306"
+  711  accept'
+  712  firewall-cmd --permanent --add-rich-rule='
+  713  rule family="ipv4"
+  714  source address="192.168.1.14"
+  715  port protocol="tcp" port="3306"
+  716  accept'
+  717  firewall-cmd --remove-port=3306/tcp --permanent
+  718  firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.1.15" port port="3306" protocol="tcp" accept'
+  719  firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.1.14" port port="3306" protocol="tcp" accept'
+  720  firewall-cmd --permanent --add-rich-rule='rule family="ipv4" port port="3306" protocol="tcp" drop'
+  721  mysql
+  722  firewall-cmd --reload
+  723  firewall-cmd --list-rich-rules
+  724  firewall-cmd --list-ports
+  725  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp -e "SELECT version, description, success FROM flyway_schema_history;"
+  726  docker exec -it vidaapp-mysql mysql -uvidaapp -p vidaapp
+  727  docker exec -it vidaapp-mysql mysql -uroot -p
+  728  cat .env 
+  729  docker exec -it vidaapp-mysql mysql -uroot -p
+  730  cd ..
+  731  ls
+  732  cd repos/
+  733  ls
+  734  cd ..
+  735  vi /opt/vidaapp/README-infra.md
+  736  dnf install -y epel-release
+  737  systemctl stop nginx
+  738  certbot certonly --standalone -d jlean92.es
+  739  docker ps
+  740  cd /opt/vidaapp/infra/docker
+  741  mkdir -p nginx/www/certbot nginx/certs
+  742  vi nginx/conf.d/vidaapp.conf
+  743  vi compose.yml 
+  744  docker compose up -d
+  745  docker exec -it vidaapp-nginx nginx -t
+  746  docker exec -it vidaapp-nginx nginx -s reload
+  747  docker compose run --rm certbot certonly   --webroot -w /var/www/certbot   -d jlean92.es   --agree-tos   --register-unsafely-without-email
+  748  vi nginx/conf.d/vidaapp.conf
+  749  docker exec -it vidaapp-nginx nginx -t
+  750  docker exec -it vidaapp-nginx nginx -s reload
+  751  docker compose up -d
+  752  ss -tulpen | grep ':80 ' || echo "NADIE escuchando en 80"
+  753  docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+  754  firewall-cmd --list-services | tr ' ' '\n' | grep -E '^http$' && echo "HTTP OK"
+  755  curl -i http://127.0.0.1/
+  756  docker logs --tail=200 vidaapp-flyway
+  757  docker exec -it vidaapp-mysql mysql -uroot -p
+  758  cat .env 
+  759  docker exec -it vidaapp-mysql mysql -uroot -p
+  760  docker compose up -d
+  761  GRANT ALL PRIVILEGES ON vidaapp.* TO 'vidaapp'@'
+  762  docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+  763  docker ps
+  764  docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+  765  docker ps
+  766  docker logs --tail=200 vidaapp-nginx
+  767  vi nginx/conf.d/vidaapp.conf 
+  768  docker compose up -d --force-recreate nginx
+  769  docker logs --tail=80 vidaapp-nginx
+  770  ss -tulpen | grep ':80 ' || echo "NADIE escuchando en 80"
+  771  mkdir -p /opt/vidaapp/infra/docker/nginx/www/certbot/.well-known/acme-challenge
+  772  echo "ok" > /opt/vidaapp/infra/docker/nginx/www/certbot/.well-known/acme-challenge/ping
+  773  curl -i http://127.0.0.1/.well-known/acme-challenge/ping
+  774  firewall-cmd --add-service=http --permanent
+  775  docker compose run --rm certbot certonly   --webroot -w /var/www/certbot   -d jlean92.es   --agree-tos   --register-unsafely-without-email
+  776  vi nginx/conf.d/vidaapp.conf
+  777  docker exec -it vidaapp-nginx nginx -t
+  778  docker exec -it vidaapp-nginx nginx -s reload
+  779  curl -i https://127.0.0.1/health
+  780  curl -i https://jlean92.es/health
+  781  cat > /etc/cron.daily/vidaapp-certbot-renew <<'EOF'
+  782  #!/bin/bash
+  783  set -e
+  784  cd /opt/vidaapp/infra/docker
+  785  /usr/bin/docker compose run --rm certbot renew --webroot -w /var/www/certbot
+  786  /usr/bin/docker exec vidaapp-nginx nginx -s reload
+  787  EOF
+  788  chmod +x /etc/cron.daily/vidaapp-certbot-renew
+  789  docker compose run --rm certbot renew --dry-run --webroot -w /var/www/certbot
+  790  cat compose.yml 
+  791  more compose.yml 
+  792  vi compose.yml 
+  793  more compose.yml 
+  794  vi compose.yml 
+  795  docker compose down
+  796  docker compose down --remove-orphans
+  797  docker compose up -d --build
+  798  vi compose.yml 
+  799  docker compose up -d --build
+  800  docker compose logs -f --tail=200
+  801  docker exec -it vidaapp-mysql mysql -uroot -p
+  802  cat .env 
+  803  docker exec -it vidaapp-mysql mysql -uroot -p
+  804  docker compose up -d --build
+  805  cd ..
+  806  mkdir gitlab
+  807  vi compose.yml
+  808  ls
+  809  rm compose.yml 
+  810  ls
+  811  cd gitlab/
+  812  ls
+  813  git --version
+  814  dig +short gitlab.jlean92.es
+  815  dig +short jlean92.es
+  816  dig +short gitlab.jlean92.es
+  817  ss -lntp | egrep ':80|:443'
+  818  vi docker-compose.yml
+  819  docker compose up -d
+  820  df -h
+  821  docker logs --tail=80 vidaapp-gitlab
+  822  docker compose ps
+  823  docker compose up -d
+  824  root@vpn:/opt/vidaapp/gitlab# docker compose up -d
+  825  [+] Running 10/10
+  826   ✔ gitlab Pulled                                                                                                           236.6s
+  827     ✔ 6414378b6477 Already exists                                                                                             0.0s
+  828     ✔ 9dfa770d7a0d Pull complete                                                                                              2.2s
+  829     ✔ 3ec3ff6c624c Pull complete                                                                                             22.9s
+  830     ✔ 48830d853604 Pull complete                                                                                             37.4s
+  831     ✔ 0d8f5299784b Pull complete                                                                                             41.3s
+  832     ✔ 26b431601cf2 Pull complete                                                                                             44.3s
+  833     ✔ a7b3a5d17fff Pull complete                                                                                             45.2s
+  834     ✔ eee256c706ff Pull complete                                                                                             46.1s
+  835     ✔ 856e136f138d Pull complete                                                                                            231.5s
+  836  network vidaapp_net declared as external, but could not be found
+  837  
+  838  docker network ls
+  839  vi docker-compose.yml
+  840  docker_vidaapp_net
+  841  docker network ls
+  842  vi docker-compose.yml
+  843  docker network ls
+  844  vi docker-compose.yml
+  845  docker compose up -d
+  846  docker compose ps
+  847  wait -n1 | docker compose ps
+  848  docker compose ps
+  849  docker logs --tail=60 vidaapp-gitlab
+  850  docker compose ps
+  851  docker compose pscurl -I http://vidaapp-gitlab/
+  852  curl -I http://vidaapp-gitlab/
+  853  docker exec -it vidaapp-nginx wget -S -O - http://vidaapp-gitlab/ 2>&1 | head -n 20
+  854  docker compose ps
+  855  docker logs --tail=60 vidaapp-gitlab
+  856  docker logs --tail=60 vidaapp-gitlab docker inspect -f '{{.State.Health.Status}}' vidaapp-gitlab
+  857  docker inspect -f '{{.State.Health.Status}}' vidaapp-gitlab
+  858  docker inspect vidaapp-gitlab --format '{{json .State.Health}}' | jq .
+  859  docker exec -it vidaapp-gitlab gitlab-ctl status
+  860  docker exec -it vidaapp-gitlab gitlab-ctl status --verbose
+  861  docker exec -it vidaapp-gitlab gitlab-ctl status && docker exec -it vidaapp-gitlab gitlab-ctl service-list
+  862  docker exec -it vidaapp-gitlab curl -sS -I http://127.0.0.1/ | head -n 20
+  863  docker exec -it vidaapp-gitlab curl -sS -I http://127.0.0.1:8080/ | head -n 20
+  864  docker logs --tail=300 vidaapp-gitlab | egrep -i "error|fatal|failed|panic|exception" || true
+  865  docker exec -it vidaapp-gitlab bash -lc 'ls -la /var/log/gitlab | head -n 50; echo "----"; ls -la /var/log/gitlab/reconfigure 2>/dev/null || true; echo "----"; tail -n 120 /var/log/gitlab/reconfigure/* 2>/dev/null || true'
+  866  docker exec -it vidaapp-gitlab bash -lc 'ls -la /var/log/gitlab | head -n 50; echo "----"; ls -la /var/log/gitlab/reconfigure 2>/dev/null || true; echo "----"; tail -n 120 /var/log/gitlab/reconfigure/* 2>/dev/null || true' >> Test.txt
+  867  cat Test.txt
+  868  more Test.txt
+  869  chown jlean:jlean Test.txt 
+  870  chmod 777 .
+  871  ls -la
+  872  chmod 777 ..
+  873  docker inspect -f '{{.State.Health.Status}}' vidaapp-gitlab
+  874  docker compose ps
+  875  docker exec -it vidaapp-gitlab curl -sS -I http://127.0.0.1/ | head -n 20
+  876  top
+  877  free
+  878  free -m
+  879  docker exec -it vidaapp-gitlab gitlab-ctl status
+  880  docker exec -it vidaapp-gitlab curl -sS -I http://127.0.0.1/ | head -n 20
+  881  docker exec -it vidaapp-gitlab bash -lc "tail -n 120 /var/log/gitlab/nginx/gitlab_error.log 2>/dev/null || tail -n 120 /var/log/gitlab/nginx/error.log 2>/dev/null || true"
+  882  docker exec -it vidaapp-gitlab bash -lc "ss -lntp | egrep '(:80|:8080|:8181|:9000|:9229|:3000)' || true"
+  883  docker exec -it vidaapp-gitlab bash -lc "netstat -lntp 2>/dev/null | head -n 200 || true"
+  884  docker exec -it vidaapp-gitlab bash -lc "cat /proc/net/tcp /proc/net/tcp6 | head -n 60"
+  885  docker exec -it vidaapp-gitlab bash -lc "cat /proc/net/tcp | head -n 60"
+  886  docker exec -it vidaapp-gitlab bash -lc "sed -n '1,200p' /var/opt/gitlab/nginx/conf/gitlab-http.conf | sed -n '1,200p'"
+  887  docker exec -it vidaapp-gitlab bash -lc "sed -n '1,200p' /var/opt/gitlab/gitlab-workhorse/config.toml | sed -n '1,200p'"
+  888  docker exec -it vidaapp-gitlab bash -lc 'echo "=== WORKHORSE CONFIG.TOML ==="; sed -n "1,200p" /var/opt/gitlab/gitlab-workhorse/config.toml'
+  889  cat /proc/cpuinfo
+  890  docker exec -it vidaapp-gitlab bash -lc 'echo "=== WORKHORSE LISTEN KEYS ==="; egrep -n "listen|socket|addr|port|host" /var/opt/gitlab/gitlab-workhorse/config.toml || true'
+  891  docker exec -it vidaapp-gitlab curl -sS -I http://127.0.0.1/ | head -n 20
+  892  docker exec -it vidaapp-gitlab bash -lc 'echo "=== UPSTREAM DEFINITION ==="; grep -RIn "upstream gitlab-workhorse" /var/opt/gitlab/nginx/conf 2>/dev/null || true; echo "----"; grep -RIn "gitlab-workhorse" /var/opt/gitlab/nginx/conf 2>/dev/null | head -n 120'
+  893  docker exec -it vidaapp-gitlab bash -lc 'ls -la /var/opt/gitlab/gitlab-workhorse/sockets || true; echo "----"; ls -la /var/opt/gitlab/gitlab-workhorse/sockets/socket 2>/dev/null || echo "NO_SOCKET"'
+  894  docker exec -it vidaapp-gitlab bash -lc 'tail -n 200 /var/log/gitlab/gitlab-workhorse/current 2>/dev/null || echo "NO_WORKHORSE_LOG"'
+  895  docker exec -it vidaapp-gitlab bash -lc 'ls -la /var/opt/gitlab/gitlab-rails/sockets || true'
+  896  docker logs -f vida_db
+  897  date
+  898  docker logs -f vida_db
+  899  2025-12-21T20:55:38.456166Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.44)  MySQL Community Server - GPL.
+  900  2025-12-21 20:56:05+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.44-1.el9 started.
+  901  2025-12-21 20:56:06+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+  902  2025-12-21 20:56:06+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.44-1.el9 started.
+  903  '/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+  904  2025-12-21T20:56:06.479993Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+  905  2025-12-21T20:56:06.483126Z 0 [Warning] [MY-010918] [Server] 'default_authentication_plugin' is deprecated and will be removed in a future release. Please use authentication_policy instead.
+  906  2025-12-21T20:56:06.483157Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.44) starting as process 1
+  907  2025-12-21T20:56:06.495360Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+  908  2025-12-21T20:56:06.592890Z 1 [ERROR] [MY-012960] [InnoDB] Cannot create redo log files because data files are corrupt or the database was not shut down cleanly after creating the data files.
+  909  2025-12-21T20:56:06.592927Z 1 [ERROR] [MY-012930] [InnoDB] Plugin initialization aborted with error Generic error.
+  910  2025-12-21T20:56:07.074721Z 1 [ERROR] [MY-010334] [Server] Failed to initialize DD Storage Engine
+  911  2025-12-21T20:56:07.074911Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+  912  2025-12-21T20:56:07.074962Z 0 [ERROR] [MY-010119] [Server] Aborting
+  913  2025-12-21T20:56:07.075421Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.44)  MySQL Community Server - GPL.
+  914  getenforce
+  915  cd /srv/vida-app/docker
+  916  shutdown -h now
+  917  docker ps
+  918  docker ps
+  919  docker ps
+  920  docker ps
+  921  docker ps
+  922  docker logs -f gitlab
+  923  docker logs -f vidaapp-gitlab
+  924  cd /opt/vidaapp/gitlab/
+  925  ls
+  926  rm Test.txt 
+  927  ls
+  928  docker remove gitlab
+  929  docker compose down
+  930  docker compose down -v
+  931  docker images | grep gitlab
+  932  docker rmi gitlab/gitlab-ce:17.6.1-ce.0
+  933  cd ..
+  934  rm gitlab/
+  935  rm gitlab
+  936  rmdir gitlab
+  937  rm -R gitlab
+  938  git --version
+  939  ssh -V
+  940  cat /etc/hostname 
+  941  vi /etc/hostname 
+  942  ssh-keygen -t ed25519 -C "vidaapp-server"
+  943  mkdir /opt/vidaapp/github
+  944  cdr /opt/vidaapp/github
+  945  cd /opt/vidaapp/github
+  946  pwd
+  947  ssh-keygen -t ed25519 -C "vidaapp-server"
+  948  git --version
+  949  ssh -V
+  950  ls
+  951  mkdir .ssh
+  952  cd .ssh/
+  953  cd ..
+  954  cp id_ed2551* .ssh/
+  955  mv id_ed2551* .ssh/
+  956  chmod 700 .ssh/
+  957  chmod 600 .ssh/id_ed25519
+  958  chmod 644 .ssh/id_ed25519.pub 
+  959  ssh -i ~/.ssh/vidaapp_github_ed25519 -o IdentitiesOnly=yes -T git@github.com
+  960  ssh -i .ssh/id_ed25519 -o IdentitiesOnly=yes -T git@github.com
+  961  cd ..
+  962  ls
+  963  cd repos/
+  964  ls
+  965  cd /opt/vidaapp/infra
+  966  git clone git@github.com:jlean92/VidaAPP.git
+  967  cd ../github/
+  968  cd .ssh/
+  969  ls
+  970  cp * /root/.ssh/
+  971  git clone git@github.com:jlean92/VidaAPP.git
+  972  cd ../../infra/
+  973* 
+  974  lks
+  975  ls
+  976  cd VidaAPP/
+  977  ls
+  978  cd VidaAPP
+  979  git status
+  980  mkdir -p docker docs
+  981  cat > README.md << 'EOF'
+# VidaApp – Infraestructura
+
+Repositorio de infraestructura del proyecto VidaApp.
+
+- Docker / Docker Compose
+- NGINX
+- Backend API
+- Base de datos
+- Seguridad first (SELinux, firewall, least privilege)
+
+Repositorio gestionado desde GitHub.
+EOF
+
+  982  cat > .gitignore << 'EOF'
+.env
+.env.*
+*.log
+data/
+secrets/
+EOF
+
+  983  git add .
+  984  git commit -m "Initial commit: base infrastructure structure"
+  985  git config --global user.name "VidaApp Server"
+  986  git config --global user.email "vidaapp-server@jlean92.es"
+  987  git config --global --list
+  988  git commit -m "Initial commit: base infrastructure structure"
+  989  git push origin main
+  990  cat /root/.ssh/id_ed25519
+  991  cat /root/.ssh/id_ed25519.pub 
+  992  git commit -m "Initial commit: base infrastructure structure"
+  993  git branch --unset-upstream
+  994  git push origin main
+  995  cd ..
+  996  cd infra/
+  997  ls
+  998  cd VidaAPP/
+  999  cp README.md ./
+ 1000  cp README.md ../
+ 1001  cd ..
+ 1002  git clone git@github.com:jlean92/VidaINFRA.git
+ 1003  git clone git@github.com:jlean92/VidaApp.git
+ 1004  git clone git@github.com:jlean92/VidaAPP.git
+ 1005  cd infra/
+ 1006  git clone git@github.com:jlean92/VidaAPP.git
+ 1007  cd ..
+ 1008  cd /opt/vidaapp/infra
+ 1009  ls
+ 1010  cd VidaAPP/
+ 1011  ls
+ 1012  cd doc
+ 1013  docker
+ 1014  cd docker
+ 1015  ls
+ 1016  cd ..
+ 1017  l
+ 1018  cd doc
+ 1019  cd docs/
+ 1020  ls
+ 1021  cd ..
+ 1022  ls
+ 1023  rm -R *
+ 1024  cd ..
+ 1025  rmdir VidaAPP/
+ 1026  ls
+ 1027  git init
+ 1028  git remote add origin git@github.com:jlean92/VidaAPP.git
+ 1029  git config --global --add safe.directory /opt/vidaapp/infra
+ 1030  git remote add origin git@github.com:jlean92/VidaAPP.git
+ 1031  git remote -v
+ 1032  .
+ 1033  cat > .gitignore << 'EOF'
+.env
+.env.*
+*.log
+data/
+secrets/
+mysql_data/
+certs/
+EOF
+
+ 1034  git status
+ 1035  git add .
+ 1036  git commit -m "Initial commit: import existing infrastructure"
+ 1037  git branch -M main
+ 1038  git push -u origin main
+ 1039  cd ..
+ 1040  ls
+ 1041  cd github/
+ 1042  ls
+ 1043  cd ..
+ 1044  rmdir github/
+ 1045  cd github/
+ 1046  ls -a
+ 1047  cd ..
+ 1048  rm -r github
+ 1049  s
+ 1050  ls
+ 1051  cd data/
+ 1052  ls
+ 1053  cd backups/
+ 1054  ls
+ 1055  cd ..
+ 1056  cd mysql/
+ 1057  ls
+ 1058  ls -a
+ 1059  cd ..
+ 1060  cd backups/
+ 1061  ls -a
+ 1062  cd ..
+ 1063  ls
+ 1064  cd logs/
+ 1065  ls
+ 1066  ls -a 
+ 1067  cd ..
+ 1068  cd repos/
+ 1069  ls
+ 1070  cd vidaapp-backend/
+ 1071  ls
+ 1072  cat Dockerfile 
+ 1073  ls requirements.txt 
+ 1074  cat requirements.txt 
+ 1075  cd ..
+ 1076  cd ,,
+ 1077  cd ..
+ 1078  ls
+ 1079  cat README
+ 1080  cat README-infra.md 
+ 1081  cat README.server.md 
+ 1082  cd infra/
+ 1083  ls
+ 1084  cat README.md 
+ 1085  cat README.md >> ../README.github.md
+ 1086  rm README.md 
+ 1087  ls
+ 1088  ls -a
+ 1089  cd ..
+ 1090  ls -a
+ 1091  cat README.server.md >> README.github.md 
+ 1092  rm README.server.md 
+ 1093  cat README-infra.md >> README.github.md 
+ 1094  cat README.github.md 
+ 1095  more README.github.md 
+ 1096  ls
+ 1097  cat README-infra.md 
+ 1098  rm README-infra.md 
+ 1099  ls
+ 1100  git config --global --add safe.directory /opt/vidaapp
+ 1101  git init
+ 1102  history
+ 1103  more history
+ 1104  history >> historial.txt

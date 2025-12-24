@@ -1,0 +1,20 @@
+# Secrets
+.env
+.env.*
+secrets/
+certs/
+
+# Docker
+**/data/
+**/mysql_data/
+**/volumes/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
