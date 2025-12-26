@@ -1,0 +1,1 @@
+E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\VidaAPP.csproj;x64

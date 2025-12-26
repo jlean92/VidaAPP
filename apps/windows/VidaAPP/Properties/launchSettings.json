@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "VidaAPP (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "VidaAPP (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

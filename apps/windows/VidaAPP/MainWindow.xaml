@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="VidaAPP.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VidaAPP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="VidaAPP">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="20">
+
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                <Button x:Name="CheckHealthButton"
+                Content="Comprobar /health"
+                Click="CheckHealthButton_Click" />
+
+                <Button x:Name="CheckDbButton"
+                Content="Comprobar /health/db"
+                Click="CheckDbButton_Click" />
+            </StackPanel>
+
+            <TextBlock x:Name="StatusText"
+               Text="Pulsa un botón"
+               FontSize="48"
+               HorizontalAlignment="Center"
+               TextAlignment="Center" />
+        </StackPanel>
+
+
+    </Grid>
+</Window>
