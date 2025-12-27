@@ -7,10 +7,11 @@ namespace VidaAPP
 {
     public sealed partial class MainWindow : Window
     {
-        private static readonly HttpClient _http = new HttpClient
+        private static readonly HttpClient httpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(5)
         };
+        private static readonly HttpClient _http = httpClient;
 
         public MainWindow()
         {
