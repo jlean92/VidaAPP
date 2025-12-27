@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "VidaAPP (Package)": {
+    "VidaApp (Package)": {
       "commandName": "MsixPackage"
     },
-    "VidaAPP (Unpackaged)": {
+    "VidaApp (Unpackaged)": {
       "commandName": "Project"
     }
   }

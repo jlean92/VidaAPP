@@ -8,31 +8,31 @@
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>Debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
-    <PackageIdentityName>eff9f33d-ad13-4da2-9aee-6979f96c339f</PackageIdentityName>
+    <PackageIdentityName>d0ff98a6-d8a1-4228-88d5-7f45136b6fb3</PackageIdentityName>
     <PackageIdentityPublisher>CN=jlean</PackageIdentityPublisher>
-    <IntermediateOutputPath>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\</IntermediateOutputPath>
+    <IntermediateOutputPath>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppX</LayoutDir>
+    <LayoutDir>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
+    <AppXManifest Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.runtimeconfig.json">
-      <PackagePath>VidaAPP.runtimeconfig.json</PackagePath>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.runtimeconfig.json">
+      <PackagePath>VidaApp.runtimeconfig.json</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
-      <PackagePath>VidaAPP.exe</PackagePath>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
+      <PackagePath>VidaApp.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.dll">
-      <PackagePath>VidaAPP.dll</PackagePath>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.dll">
+      <PackagePath>VidaApp.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jlean\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.22\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -694,34 +694,34 @@
     <AppxPackagedFile Include="C:\Users\jlean\.nuget\packages\microsoft.web.webview2\1.0.3179.45\lib_manual\net8.0-windows10.0.17763.0\Microsoft.Web.WebView2.Core.Projection.dll">
       <PackagePath>Microsoft.Web.WebView2.Core.Projection.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.deps.json">
-      <PackagePath>VidaAPP.deps.json</PackagePath>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.deps.json">
+      <PackagePath>VidaApp.deps.json</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jlean\.nuget\packages\microsoft.web.webview2\1.0.3179.45\build\..\lib\Microsoft.Web.WebView2.Core.winmd">
       <PackagePath>Microsoft.Web.WebView2.Core.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

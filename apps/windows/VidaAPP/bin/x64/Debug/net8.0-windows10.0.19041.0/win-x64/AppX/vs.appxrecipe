@@ -8,42 +8,42 @@
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>Debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
-    <PackageIdentityName>eff9f33d-ad13-4da2-9aee-6979f96c339f</PackageIdentityName>
+    <PackageIdentityName>d0ff98a6-d8a1-4228-88d5-7f45136b6fb3</PackageIdentityName>
     <PackageIdentityPublisher>CN=jlean</PackageIdentityPublisher>
-    <IntermediateOutputPath>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\</IntermediateOutputPath>
+    <IntermediateOutputPath>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath>
     </PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppX</LayoutDir>
-    <RegisteredManifestChecksum>D41E7A4C16513FC993003657420031DBD5AE7AB3B383D4F1B6D5D733809B988F</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>eff9f33d-ad13-4da2-9aee-6979f96c339f_1.0.0.0_x64__zy2r4vp2j92ey</RegisteredPackageMoniker>
-    <RegisteredUserModeAppID>eff9f33d-ad13-4da2-9aee-6979f96c339f_zy2r4vp2j92ey!App</RegisteredUserModeAppID>
-    <RegisteredPackageID>eff9f33d-ad13-4da2-9aee-6979f96c339f</RegisteredPackageID>
+    <LayoutDir>E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppX</LayoutDir>
+    <RegisteredManifestChecksum>31B191334258B6685B62DB4E2EF57F70362F163C6C63532EBC4A9364F06C0853</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>d0ff98a6-d8a1-4228-88d5-7f45136b6fb3_1.0.0.0_x64__zy2r4vp2j92ey</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>d0ff98a6-d8a1-4228-88d5-7f45136b6fb3_zy2r4vp2j92ey!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>d0ff98a6-d8a1-4228-88d5-7f45136b6fb3</RegisteredPackageID>
     <RegisteredPackagePublisher>CN=jlean</RegisteredPackagePublisher>
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
+    <AppXManifest Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-12-25T22:51:29.690</Modified>
+      <Modified>2025-12-27T10:10:04.452</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.runtimeconfig.json">
-      <PackagePath>VidaAPP.runtimeconfig.json</PackagePath>
-      <Modified>2025-12-25T22:34:16.697</Modified>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.runtimeconfig.json">
+      <PackagePath>VidaApp.runtimeconfig.json</PackagePath>
+      <Modified>2025-12-27T10:10:03.679</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
-      <PackagePath>VidaAPP.exe</PackagePath>
-      <Modified>2025-12-25T22:51:29.333</Modified>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
+      <PackagePath>VidaApp.exe</PackagePath>
+      <Modified>2025-12-27T10:10:03.203</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.dll">
-      <PackagePath>VidaAPP.dll</PackagePath>
-      <Modified>2025-12-25T22:51:29.326</Modified>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.dll">
+      <PackagePath>VidaApp.dll</PackagePath>
+      <Modified>2025-12-27T10:10:03.179</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jlean\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.22\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -925,35 +925,35 @@
       <PackagePath>Microsoft.Web.WebView2.Core.Projection.dll</PackagePath>
       <Modified>2025-03-30T09:04:20.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaAPP.deps.json">
-      <PackagePath>VidaAPP.deps.json</PackagePath>
-      <Modified>2025-12-25T22:34:16.671</Modified>
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\VidaApp.deps.json">
+      <PackagePath>VidaApp.deps.json</PackagePath>
+      <Modified>2025-12-27T10:10:03.654</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2025-12-25T20:16:05.176</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <Modified>2025-12-25T20:16:05.177</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <Modified>2025-12-25T20:16:05.178</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <Modified>2025-12-25T20:16:05.179</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <Modified>2025-12-25T20:16:05.180</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <Modified>2025-12-25T20:16:05.180</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <Modified>2025-12-25T20:16:05.181</Modified>
     </AppxPackagedFile>
@@ -961,9 +961,9 @@
       <PackagePath>Microsoft.Web.WebView2.Core.winmd</PackagePath>
       <Modified>2025-03-30T09:03:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaAPP\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
+    <AppxPackagedFile Include="E:\VIDA\vidaapp\VidaAPP\apps\windows\VidaApp\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-12-25T22:51:29.466</Modified>
+      <Modified>2025-12-27T10:10:03.918</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

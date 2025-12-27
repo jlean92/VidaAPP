@@ -26,6 +26,11 @@
                 <Button x:Name="CheckDbButton"
                 Content="Comprobar /health/db"
                 Click="CheckDbButton_Click" />
+                
+                <Button x:Name="CheckUpdatesButton"
+                Content="Comprobar actualizaciones"
+                Click="CheckUpdatesButton_Click" />
+
             </StackPanel>
 
             <TextBlock x:Name="StatusText"

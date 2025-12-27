@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\VidaAPP.csproj": {}
+    "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\VidaApp.csproj": {}
   },
   "projects": {
-    "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\VidaAPP.csproj": {
+    "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\VidaApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\VidaAPP.csproj",
-        "projectName": "VidaAPP",
-        "projectPath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\VidaAPP.csproj",
+        "projectUniqueName": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\VidaApp.csproj",
+        "projectName": "VidaApp",
+        "projectPath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\VidaApp.csproj",
         "packagesPath": "C:\\Users\\jlean\\.nuget\\packages\\",
-        "outputPath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\obj\\",
+        "outputPath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,12 @@
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "dependencies": {
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.22, )",
+              "autoReferenced": true
+            },
             "Microsoft.Windows.SDK.BuildTools": {
               "target": "Package",
               "version": "[10.0.26100.7175, )"
@@ -85,6 +91,10 @@
               "version": "[8.0.22, 8.0.22]"
             },
             {
+              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
+              "version": "[8.0.22, 8.0.22]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Runtime.win-arm64",
               "version": "[8.0.22, 8.0.22]"
             },
@@ -115,7 +125,7 @@
           ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "none"
+              "privateAssets": "all"
             },
             "Microsoft.Windows.SDK.NET.Ref.Windows": {
               "privateAssets": "all"

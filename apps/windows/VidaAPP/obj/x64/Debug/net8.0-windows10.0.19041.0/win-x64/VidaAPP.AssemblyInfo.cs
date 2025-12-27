@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("VidaAPP")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("VidaApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1130fabdc432cb484f7ef0dc5b2e3e9cb78cb895")]
-[assembly: System.Reflection.AssemblyProductAttribute("VidaAPP")]
-[assembly: System.Reflection.AssemblyTitleAttribute("VidaAPP")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3592ba1502d2f0891969b70a5a6215446b71d2e1")]
+[assembly: System.Reflection.AssemblyProductAttribute("VidaApp")]
+[assembly: System.Reflection.AssemblyTitleAttribute("VidaApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows10.0.19041.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows10.0.17763.0")]

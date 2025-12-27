@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1m30cD32+80=",
+  "dgSpecHash": "+VDMFqTKZkA=",
   "success": true,
-  "projectFilePath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaAPP\\VidaAPP.csproj",
+  "projectFilePath": "E:\\VIDA\\vidaapp\\VidaAPP\\apps\\windows\\VidaApp\\VidaApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jlean\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.22\\microsoft.net.illink.tasks.8.0.22.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.26100.7175\\microsoft.windows.sdk.buildtools.10.0.26100.7175.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.windows.sdk.buildtools.msix\\1.7.20250829.1\\microsoft.windows.sdk.buildtools.msix.1.7.20250829.1.nupkg.sha512",
@@ -19,6 +20,7 @@
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.windowsappsdk.winui\\1.8.251105000\\microsoft.windowsappsdk.winui.1.8.251105000.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\system.numerics.tensors\\9.0.0\\system.numerics.tensors.9.0.0.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.22\\microsoft.netcore.app.runtime.win-x86.8.0.22.nupkg.sha512",
+    "C:\\Users\\jlean\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\8.0.22\\microsoft.netcore.app.crossgen2.win-x64.8.0.22.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.22\\microsoft.aspnetcore.app.runtime.win-x86.8.0.22.nupkg.sha512",
     "C:\\Users\\jlean\\.nuget\\packages\\microsoft.netcore.app.runtime.win-arm64\\8.0.22\\microsoft.netcore.app.runtime.win-arm64.8.0.22.nupkg.sha512",

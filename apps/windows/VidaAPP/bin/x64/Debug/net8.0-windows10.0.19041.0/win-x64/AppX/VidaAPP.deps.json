@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {},
     ".NETCoreApp,Version=v8.0/win-x64": {
-      "VidaAPP/1.0.0": {
+      "VidaApp/1.0.0": {
         "dependencies": {
           "Microsoft.WindowsAppSDK": "1.8.251106002",
           "Microsoft.Web.WebView2.Core.Projection": "1.0.3179.45",
@@ -15,7 +15,7 @@
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.19041.57"
         },
         "runtime": {
-          "VidaAPP.dll": {}
+          "VidaApp.dll": {}
         }
       },
       "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/8.0.22": {
@@ -953,7 +953,7 @@
     }
   },
   "libraries": {
-    "VidaAPP/1.0.0": {
+    "VidaApp/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
