@@ -33,7 +33,7 @@ def health_db():
 @app.get("/update/check")
 def update_check():
     current_version = os.getenv("APP_VERSION", "0.0.0")
-    latest_path = os.getenv("UPDATE_LATEST_PATH", "/updates/latest.json")
+    latest_path = os.getenv("UPDATE_LATEST_PATH", "/updates/windows/latest.json")
 
     # Si no existe metadata, devolvemos "sin update" (no petamos)
     if not os.path.exists(latest_path):
