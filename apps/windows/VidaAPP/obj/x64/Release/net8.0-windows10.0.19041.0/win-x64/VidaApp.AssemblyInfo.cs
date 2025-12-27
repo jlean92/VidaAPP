@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VidaApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3592ba1502d2f0891969b70a5a6215446b71d2e1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0923928dff1fa82dc0f40437c995107f836c46f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("VidaApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VidaApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
